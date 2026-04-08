@@ -5,9 +5,15 @@ import io
 from PIL import Image
 import torchvision.transforms as transforms
 import torch.nn as nn
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="MNIST CNN API")
-
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+)
 # Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
